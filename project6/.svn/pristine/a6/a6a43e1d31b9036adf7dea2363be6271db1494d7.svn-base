@@ -1,0 +1,350 @@
+<!-- start: UI BOOTSTRAP MODALS -->
+<div class="container-fluid container-fullw bg-white">
+	<div ng-controller="AsideCtrl">
+		<div class="row">
+			<div class="col-md-12">
+				<h5 class="over-title margin-bottom-15">UI Bootstrap <span class="text-bold">Modals</span></h5>
+				<p>
+					$modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+				</p>
+				<script type="text/ng-template" id="myModalContent.html">
+					<div class="modal-header">
+					<h3 class="modal-title">I'm a modal!</h3>
+					</div>
+					<div class="modal-body">
+					<ul>
+					<li ng-repeat="item in items">
+					<a ng-click="selected.item = item">{{ item }}</a>
+					</li>
+					</ul>
+					Selected: <b>{{ selected.item }}</b>
+					</div>
+					<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="ok()">OK</button>
+					<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+					</div>
+				</script>
+				<div class="row">
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Default Modal
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Toggle a modal by clicking the button below. It will slide down and fade in from the top of the page.
+								</p>
+								<button class="btn btn-primary btn-o pull-right" ng-click="open()">
+									Open Deafult Modal
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Large Modal
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Modals have a large optional size, available by setting option <code>size: 'lg'</code> in the method <code>open(options)</code>
+								</p>
+								<button class="btn btn-primary btn-o pull-right" ng-click="open('lg')">
+									Open Large Modal
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Small Modal
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Modals have a small optional size, available by setting option <code>size: 'sm'</code> in the method <code>open(options)</code>
+								</p>
+								<button class="btn btn-primary btn-o pull-right" ng-click="open('sm')">
+									Open Small Modal
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-show="selected" class="margin-top-15 text-small">
+					Selection from a modal: {{ selected }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: UI BOOTSTRAP MODALS -->
+<!-- start: ASIDE -->
+<div class="container-fluid container-fullw">
+	<div ng-controller="AsideCtrl">
+		<div class="row">
+			<div>
+				<h5 class="over-title">Angular <span class="text-bold">Aside</span></h5>
+				<p class="margin-bottom-30">
+					Off canvas side menu to use with ui-bootstrap. Extends ui-bootstrap's $modal provider.
+				</p>
+				<script type="text/ng-template" id="asideContent.html">
+					<div class="hbox">
+					<!-- column -->
+					  <div class="col w-md lter b-l">
+					    <div class="vbox">
+					      <div class="wrapper b-b b-light">
+							<a class="pull-right h3" ng-click="cancel()"><i class="icon-close"></i></a>
+							<div class="panel-title h3" ng-click="editItem(item)">公司发文</div>
+					      </div>
+					      <div class="row-row">
+					        <div class="cell">
+					          <div class="cell-inner">
+					            <div class="wrapper-md">
+					              This is the scrollable content
+					              <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+					              You got the bottom
+					            </div>
+					          </div>
+					        </div>
+					      </div>
+					      <div class="wrapper b-t b-light text-center">
+					        <a href class="btn btn-info" ng-click="cancel();">Create Marker</a>
+					      </div>
+					    </div>
+					  </div>
+					  <!-- /column -->
+					</div>
+				</script>
+				<div class="row">
+					<div class="col-sm-6 col-lg-3">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Up Aside
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									This modal slide down from the top of the page.
+								</p>
+								<button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-up" ng-click="openAside('top')">
+									<span>Up</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Left Aside
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									This modal slides from the left side of the page.
+								</p>
+								<button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-left" ng-click="openAside('left')">
+									<span>Left</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Down Aside
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									This modal slide up from the bottom of the page.
+								</p>
+								<button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-down" ng-click="openAside('bottom')">
+									<span>Down</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Right Aside
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									This modal slides from the right side of the page
+								</p>
+								<button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-right" ng-click="openAside('right')">
+									<span>Right</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: ASIDE -->
+
+
+<!-- start: SWEETALERT -->
+<div class="container-fluid container-fullw bg-white">
+	<div ng-controller="SweetAlertCtrl">
+		<div class="row">
+			<div class="col-md-12">
+				<h5 class="over-title margin-bottom-15"><span class="text-bold">ngSweetAlert</span></h5>
+				<p>
+					AngularJS wrapper for SweetAlert. Sweet Alert is a beautiful replacement for Javascript's "Alert".
+				</p>
+				<div class="row">
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Basic message
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Show a basic message to give information to the user or to warn about a potentially damaging operation.
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo1();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Title with a text under
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Not enough basic message? Show more information to the user by entering a text below the title
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo2();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Success message
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Shows the user a message to warn him that a certain operation is successful.
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo3();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Warning message
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									Shows the user a warning message, with a function attached to the "Confirm" button.
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo4();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Another warning message
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									By passing a parameter to warning message, you can execute something else for "Cancel".
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo5();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									Custom icon
+								</div>
+							</div>
+							<div class="panel-body">
+								<p class="margin-bottom-30">
+									If desired, you can make more effective the message by adding a custom icon
+								</p>
+								<button class="btn btn-primary pull-right" ng-click="demo6();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									自动关闭
+								</div>
+							</div>
+							<div class="panel-body">
+								<button class="btn btn-primary pull-right" ng-click="demo7();">
+									Open Message
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-sm-6">
+						<div class="panel panel-transparent min-height-200">
+							<div class="panel-heading">
+								<div class="panel-title">
+									头像
+								</div>
+								<div class="pull-left" ng-bind-html="avatar('assets/img/a0.jpg','','lg')"></div>
+								<div class="pull-left" ng-bind-html="avatar('https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3c6d55fbb2fb4316ba2410d621a4462309f7d367.jpg','','lg')"></div>
+								<div class="pull-left" ng-bind-html="avatar('','陈明','lg')"></div>
+								<div class="pull-left" ng-bind-html="avatar('','刘德华','lg')"></div>
+								<div class="pull-left" ng-bind-html="avatar('','丽','lg')"></div>
+								<div class="pull-left" ng-bind-html="avatar('','L','lg')"></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: SWEETALERT -->

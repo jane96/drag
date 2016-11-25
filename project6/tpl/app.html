@@ -1,0 +1,36 @@
+  <!-- navbar -->
+  <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+  </div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+    <div class="app-content-body fade-in-up" style="padding-bottom:0" ui-view></div>
+    <div style="position:fixed;bottom:50px;right:40px;index:99999">
+        <!-- <a class="m-r-sm" href=""><img src="assets/img/plus_icon.png" style="width:50px" alt=""></a> -->
+        <a href=""><img src="assets/img/message_icon.png" style="width:50px" alt=""></a>
+    </div>
+  </div>
+  <!-- /content -->
+
+  <!-- aside.right -->
+  <div data-ng-include=" 'tpl/blocks/aside-chat.html' " class="aside-right hidden-xs">
+  </div>
+  <!-- / aside.right -->
+
+  <!-- footer -->
+  <div class="app-footer wrapper b-t bg-light">
+    <span class="pull-right">{{app.version}} <a href ui-scroll-to="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+    &copy; 2015 Copyright.
+  </div>
+  <!-- / footer -->
+
+  <div data-ng-include=" 'tpl/blocks/settings.html' " class="settings panel panel-default">
+  </div>

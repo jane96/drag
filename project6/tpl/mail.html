@@ -1,0 +1,55 @@
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="MailCtrl">
+  <div class="col w-md dk b-r bg-auto">
+    <div class="nav-tabs-alt">
+        <ul class="nav nav-tabs nav-justified">
+          <li ng-class="{'active': tabs[0]}" class="active">
+            <a href ng-click="tab(0)"><h4>事务</h4></a>
+          </li>
+          <li ng-class="{'active': tabs[1]}">
+            <a href ng-click="tab(1)"><h4>消息</h4></a>
+          </li>         
+        </ul>
+    </div>
+   <!--  <div class="wrapper b-b bg">
+      <div class="m-b-sm">
+        <div class="btn-group btn-group-justified">
+          <a ui-sref="app.mail.compose" class="btn m-b-xs w-xs btn-success btn-rounded">新建事务</a>
+        </div>
+      </div>
+    </div> -->
+    <div class="wrapper hidden-sm hidden-xs" id="email-menu">
+      <div class="wrapper">流程管理</div>
+      <ul class="nav nav-pills nav-stacked nav-sm">
+        <li ng-repeat="fold in folds" ui-sref-active="active">
+          <a ui-sref="app.mail.list({fold:fold.filter})">
+            <div class="badge badge-empty pull-right">16</div>
+            {{fold.name}}
+          </a>
+        </li>
+      </ul>
+      <div class="wrapper">我的流程</div>
+      <ul class="nav nav-pills nav-stacked nav-sm">
+        <li ng-repeat="label in labels" ui-sref-active="active">
+          <a ui-sref="app.mail.list({fold:label.filter})">
+            <i class="fa fa-fw fa-circle text-muted" color="{{label.color}}" label-color ></i>
+            {{label.name}}
+          </a>
+        </li>
+      </ul>
+      <div class="wrapper">
+        <form name="label">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" ng-model="newLabel.name" placeholder="New label" required>
+            <span class="input-group-btn">
+              <button class="btn btn-sm btn-default" type="button" ng-click="addLabel()" ng-disabled="label.$invalid">Add</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div ui-view ></div>
+  </div>
+</div>

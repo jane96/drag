@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="asideApp">
+  <head>
+    
+	<link href="../../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+	<link href="../../../css/animate.min.css" rel="stylesheet">
+	<link href="../../../css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="../../../css/test.css?v=4.1.0" rel="stylesheet">
+	<link href="../../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+	<link href="../../../css/plugins/stickytableheaders/table-sticky-header.css" rel="stylesheet">
+	<link href="../../../js/plugins/ng-table/dist/ng-table.min.css" rel="stylesheet">
+
+	<link href="../../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../js/plugins/angular-aside/src/styles/aside.css"/>
+    <script src="https://code.angularjs.org/1.2.28/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="src/scripts/app.js"></script>
+    <script src="src/scripts/services/aside.js"></script>
+    <script>
+      angular.module('asideApp', ['ui.bootstrap', 'ngAside'])
+        .controller('MainCtrl', function($scope, $aside) {
+          $scope.openAside = function(position) {
+            $aside.open({
+              templateUrl: 'aside.html',
+              placement: position,
+              backdrop: true,
+              controller: function($scope, $modalInstance) {
+                $scope.ok = function(e) {
+                  $modalInstance.close();
+                  e.stopPropagation();
+                };
+                $scope.cancel = function(e) {
+                  $modalInstance.dismiss();
+                  e.stopPropagation();
+                };
+              }
+            })
+          }
+        });
+    </script>
+    <script type="text/ng-template" id="aside.html">
+      <div class="modal-header">
+          <h3 class="modal-title">ngAside</h3>
+      </div>
+      <div class="modal-body">
+        Look im in aside.
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" ng-click="ok($event)">OK</button>
+          <button class="btn btn-warning" ng-click="cancel($event)">Cancel</button>
+      </div>
+    </script>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <div class="container">
+      <div class="jumbotron panel panel-default">
+        <h1>Angular Aside</h1>
+        <p>
+          Off canvas side menu to use with ui-bootstrap. Extends ui-bootstrap's $modal provider.
+        </p>
+        <p>
+          <a href="https://github.com/dbtek/angular-aside" class="btn btn-primary btn-lg" id="downloadbtn">
+            <span class="glyphicon glyphicon-download"></span> Download
+          </a>
+          <br />
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://github.com/dbtek/angular-aside" data-via="dbtek">Tweet</a>
+          <iframe src="http://ghbtns.com/github-btn.html?user=dbtek&repo=angular-aside&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="107" height="20"></iframe>
+        </p>
+        <div>
+          <ul class="text-center about-links list-inline">
+            <li class="love">
+              made with <i class="fa fa-heart"></i> by <a href="http://twitter.com/dbtek" onClick="_gaq.push(['_trackEvent', 'Outbound Link', 'View twitter account']);">@dbtek</a>
+            </li>
+            <li class="lab">
+              <i class="fa fa-flask"></i>
+              <a href="https://github.com/dbtek/angular-aside">github project</a>
+            </li>
+            <li class="cypher">
+              <i class="fa fa-code"></i>
+              <a href="http://opensource.org/licenses/MIT">license: MIT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="jumbotron panel panel-default">
+        <h2>Demo</h2>
+        <p>
+          <span class="pull-left">
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('left')">
+              <span class="glyphicon glyphicon-align-justify"></span> Left
+            </button>
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('top')">
+              Up <span class="glyphicon glyphicon-arrow-down"></span>
+            </button>
+          </span>
+          <span class="pull-right">
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('bottom')">
+              Down <span class="glyphicon glyphicon-arrow-up"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('right')">
+              Right <span class="glyphicon glyphicon-align-justify"></span>
+            </button>
+          </span>
+        </p>
+        <div class="clearfix"></div>
+        <br />
+        <!-- plunk-hr -->
+        <div class="text-center">
+          <ins class="adsbygoogle text-center"
+               style="display:inline-block;width:320px;height:100px"
+               data-ad-client="ca-pub-7616772085785107"
+               data-ad-slot="4180012826"></ins>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<style>
+    .nav-tabs-alt .nav-tabs > li > a {
+    background: transparent !important;
+    border-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-radius: 0;
+}
+.nav-tabs-alt .nav-tabs > li.active > a {
+    font-weight: bold;
+    font-size: 18px;
+}
+</style>
+<div ng-controller="WorksListCtrl">
+  <!-- header -->
+  <div class="bg-light lter b-b">
+    <!-- <div class="btn-group pull-right">
+      <button type="button" class="btn btn-bg m-b-xs btn-default"><i class="fa fa-chevron-left"></i></button>
+      <button type="button" class="btn btn-bg m-b-xs btn-default"><i class="fa fa-chevron-right"></i></button>
+    </div> -->
+    <div class="m-t-sm col-sm-{{number}}" ng-controller="CustomTabController">
+        <!-- <span class="text-lg font-bold">全部待办</span>
+        <span class="m-l-sm">超时待办</span> -->
+        <div class="nav-tabs-alt">
+          <ul class="nav nav-tabs nav-justified">
+            <li ng-class="{'active': tabs[0]}">
+              <a href ng-click="tab(0)" style="padding-bottom:15px">{{identify}}</a>
+            </li>
+            <li ng-class="{'active': tabs[1]}" ng-show="overtimeFlag">
+              <a href ng-click="tab(1)" style="padding-bottom:15px">{{overtime}}</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+    <div class="btn-toolbar">
+      <!-- <div class="btn-group">
+        <button class="btn btn-bg m-b-xs btn-success btn-addon"><i class="fa fa-plus"></i>新建事务 <span class="caret"></span></button>
+      </div> -->
+      <div class="btn-group dropdown m-t-md" dropdown>
+        <button class="btn btn-default" dropdown-toggle>分类 <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href>事务</a></li>
+          <li><a href>公文</a></li>
+          <li><a href>集团</a></li>
+        </ul>
+      </div>
+      <div class="btn-group dropdown m-t-md" dropdown ng-show="showSort">
+        <button class="btn btn-default" dropdown-toggle>排序 <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href>时间由远到近</a></li>
+          <li><a href>时间由近到远</a></li>
+        </ul>
+      </div>
+      <div class="btn-group dropdown m-t-md" dropdown ng-show="showFilter">
+        <button class="btn btn-default" dropdown-toggle>筛选 <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href>Action</a></li>
+          <li><a href>Another action</a></li>
+          <li><a href>Something else here</a></li>
+        </ul>
+      </div>
+      <form class="navbar-form navbar-form-sm navbar-left m-t-md">
+        <div class="form-group">
+          <div class="input-group">
+            <input placeholder="查找" type="text" ng-model="selected" class="form-control input-sm bg-light no-border rounded padder">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+            </span>
+          </div>
+        </div>
+      </form>
+      <div class="btn-group m-t-md m-r-sm" style="float:right">
+        <!-- <a ui-sref="app.works.list({fold:fold})"> -->
+            <button ng-click="refresh()" class="btn btn-bg m-b-xs btn-default" data-toggle="tooltip" data-placement="bottom" data-title="Refresh" data-original-title="" title=""><i class="fa fa-refresh"></i></button>
+        <!-- </a> -->
+      </div>
+    </div>
+  </div>
+  <!-- / header -->
+      <div style="overflow:hidden">
+          <div class="col-sm-2 m-l-sm m-t-sm" style="padding:0;color:#6254b2">
+              <!-- <div class="m-t-xs">{{today}}</div>
+              <div style="font-size:20px;">{{week}}</div> -->
+              <div class="col-xs-4" style="font-size:22px;padding:0">{{week}}</div>
+              <div class="col-xs-6" style="padding:0">
+                  <div>{{today}}</div>
+                  <div>{{year}}</div>
+              </div>
+          </div>
+          <div class="col-sm-9 m-t-sm" style="padding-left:0">
+              <div class="btn-group btn-group-justified">
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'">全部</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'one'">近一天</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'two'">近两天</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'three'">近三天</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'four'">三天前</label>
+                  <!-- <label class="btn btn-primary" ng-model="radioModel" btn-radio="'five'">{{friday}}</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'six'">{{saturday}}</label>
+                  <label class="btn btn-primary" ng-model="radioModel" btn-radio="'seven'">{{sunday}}</label> -->
+              </div>
+          </div>
+      </div>
+
+  <!-- list -->
+  <ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs" ui-scroll-viewport style="height:{{windowHeight-200}}px;overflow-y: auto;" >
+    <li ng-repeat="mail in mails | filter:fold" ng-class="labelClass(mail.label)" class="list-group-item clearfix b-l-3x">
+      <a ui-sref="app.page.profile" class="avatar thumb pull-left m-r">
+        <img ng-src="{{mail.avatar}}">
+        <!-- <img ng-bind-html="avatar('assets/img/a0.jpg','','lg')"> -->
+      </a>
+      <div class="pull-right text-sm text-muted">
+        <span class="hidden-xs">{{ mail.date }}</span>
+        <!-- <i class="fa fa-paperclip ng-hide m-l-sm" ng-show="{{mail.attach}}"></i> -->
+        <!-- <div class="m-t-xs"><a style="float:right" href=""><i class="icon-bubbles"></i></a></div> -->
+      </div>
+      <div class="clear">
+        <div><a ui-sref="app.works.detail({mailId:mail.id})" class="text-md">{{mail.subject}}</a><a ng-click="openFlow('right')"><span class="label bg-light m-l-sm">{{mail.type}}</span></a></div>
+        <div class="text-ellipsis m-t-xs"><span>拟稿：{{mail.makeDraft}}</span><span class="m-l-lg">当前环节：{{mail.current}}</span></div>
+      </div>
+    </li>
+  </ul>
+  <!-- / list -->
+
+
+        <script type="text/ng-template" id="asideContent.html">
+          <div class="hbox">
+          <!-- column -->
+            <div class="col w-md lter b-l">
+              <div class="vbox">
+                <div class="wrapper b-b b-light">
+              <a class="pull-right h3" ng-click="cancel()"><i class="icon-close"></i></a>
+              <div class="panel-title h3" ng-click="editItem(item)">公司发文</div>
+                </div>
+                <div class="row-row">
+                  <div class="cell">
+                    <div class="cell-inner">
+                      <div class="wrapper-md">
+                        This is the scrollable content
+                        <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                        You got the bottom
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrapper b-t b-light text-center">
+                  <a href class="btn btn-info" ng-click="cancel();">Create Marker</a>
+                </div>
+              </div>
+            </div>
+            <!-- /column --> </div>
+        </script>
+</div>
